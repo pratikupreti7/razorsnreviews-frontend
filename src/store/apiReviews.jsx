@@ -21,7 +21,7 @@ export const addReviewAsync = (reviewData) => {
         },
       }
 
-      const { data } = await axios.post('/api/reviews', reviewData, config)
+      const { data } = await axios.post('https://razorsnreviews-api.onrender.com/api/reviews', reviewData, config)
       console.log(data)
       dispatch(addSuccess(data))
     } catch (error) {
@@ -52,7 +52,7 @@ export const changeReviewAsync = ({ salonId, ...reviewData }) => {
 
       // use PUT method to send the updated data to the server
       const { data } = await axios.put(
-        `/api/reviews/${salonId}`,
+        `https://razorsnreviews-api.onrender.com/api/reviews/${salonId}`,
         reviewData,
         config,
       )

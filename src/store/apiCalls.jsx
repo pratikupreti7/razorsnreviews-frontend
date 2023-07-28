@@ -17,7 +17,7 @@ export const login = (values) => async (dispatch) => {
         'Content-type': 'application/json',
       },
     }
-    const { data } = await axios.post('/api/user/login', values, config)
+    const { data } = await axios.post('https://razorsnreviews-api.onrender.com/api/user/login', values, config)
     dispatch(loginSuccess(data))
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
@@ -33,7 +33,7 @@ export const register = (values) => async (dispatch) => {
         'Content-type': 'application/json',
       },
     }
-    const { data } = await axios.post('/api/user/register', values, config)
+    const { data } = await axios.post('https://razorsnreviews-api.onrender.com/api/user/register', values, config)
 
     dispatch(registerSuccess(data))
     dispatch(loginSuccess(data))

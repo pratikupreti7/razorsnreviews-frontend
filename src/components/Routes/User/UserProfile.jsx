@@ -27,7 +27,7 @@ const UserProfile = () => {
       dispatch(fetchSalonsByUserAsync(userInfo._id))
       navigate('/userprofile')
     }
-  }, [navigate, userInfo, dispatch, salonuser])
+  }, [navigate, userInfo, dispatch])
 
   const handleEdit = () => {
     setIsEditMode(true)

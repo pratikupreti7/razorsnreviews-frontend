@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lily+Script+One&family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Rubik:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Sedgwick+Ave+Display&display=swap');
+
+/* Your other CSS styles and Tailwind imports */
+
+/* Your other CSS styles and Tailwind imports */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #d6e4ffc4;
+
+  /*  */
+
+  /* background-color: #ceb9fd; */
+  /* color: #ffffff; */
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchSalonsAsync } from '../../../store/apiSalonCalls'
 import Filters from '../../Filters/Filters'
-import SalonItem from '../../SalonItem/SalonItem'
+// import SalonItem from '../../SalonItem/SalonItem'
 import Search from '../../Search/Search'
 import Error from '../Error/Error'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,8 +10,10 @@ import { faClock, faHourglass } from '@fortawesome/free-solid-svg-icons'
 import { useLocation, useNavigate } from 'react-router-dom'
 import ReactLoading from 'react-loading'
 import { motion } from 'framer-motion'
+import { Puff } from 'react-loader-spinner'
 const SalonHomeList = () => {
   // const [messageSalonCreated, setMessageSalonCreated] = useState('')
+  const SalonItem = React.lazy(() => import('../../SalonItem/SalonItem'))
   const [isDescendingActive, setIsDescendingActive] = useState(true)
   const [isAscendingActive, setIsAscendingActive] = useState(false)
   const userid = useSelector((state) => state?.user?.userInfo?._id) || ''
@@ -244,13 +246,13 @@ const SalonHomeList = () => {
 
   const salonPage = true
 
-  if (loading || isInitialLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <ReactLoading type="spin" color="#fff" height={50} width={50} />
-      </div>
-    )
-  }
+  // if (loading || isInitialLoading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-screen">
+  //       <ReactLoading type="spin" color="#fff" height={50} width={50} />
+  //     </div>
+  //   )
+  // }
 
   if (error) {
     return <Error />
@@ -370,23 +372,31 @@ const SalonHomeList = () => {
             No salon found for this search 😞 ... Try again !
           </h2>
         ) : (
-          <div className="flex flex-wrap justify-center p-2">
-            {filteredData?.map((salon) => (
-              <div
-                key={salon._id}
-                className=" cursor-pointer bg-white shadow-lg w-full md:3/12 lg:w-5/12 lg:m-2 lg:justify-center rounded-lg overflow-hidden  mb-6 mx-1 p-6 flex flex-col justify-between"
-              >
-                <SalonItem
-                  key={salon._id}
-                  salon={salon}
-                  salonPage={salonPage}
-                  isEditPage={false}
-                  createdByCurrentUser={salon.user === userid}
-                  userid={userid}
-                />
+          <React.Suspense
+            fallback={
+              <div className="flex justify-center items-center h-screen">
+                <Puff color="#00BFFF" height={300} width={300} />
               </div>
-            ))}
-          </div>
+            }
+          >
+            <div className="flex flex-wrap justify-center p-2">
+              {filteredData?.map((salon) => (
+                <div
+                  key={salon._id}
+                  className=" cursor-pointer bg-white shadow-lg w-full md:3/12 lg:w-5/12 lg:m-2 lg:justify-center rounded-lg overflow-hidden  mb-6 mx-1 p-6 flex flex-col justify-between"
+                >
+                  <SalonItem
+                    key={salon._id}
+                    salon={salon}
+                    salonPage={salonPage}
+                    isEditPage={false}
+                    createdByCurrentUser={salon.user === userid}
+                    userid={userid}
+                  />
+                </div>
+              ))}
+            </div>
+          </React.Suspense>
         )}
       </motion.div>
     </motion.div>

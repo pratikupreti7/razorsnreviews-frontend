@@ -27,7 +27,7 @@ const LandingPage = () => {
         {showLogoutMessage}
       </div>
 
-      <div className="bg-white p-8 rounded flex flex-col justify-start items shadow-md text-center h-60 ">
+      <div className="bg-white  rounded flex flex-col justify-start items shadow-md text-center h-60 ">
         <h1 className="text-4xl text-gray-700 font-bold font-lily text-white-800 mb-8">
           <span className="text-[#ff7476]">Welcome</span> to Razors{' '}
           <span className="text-[#ff7476]">N</span> Reviews

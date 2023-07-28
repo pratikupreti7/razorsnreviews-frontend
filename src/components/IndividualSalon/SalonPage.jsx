@@ -25,7 +25,7 @@ const SalonPage = () => {
     return formattedDate
   }
   const { id } = useParams() // Access the salon ID from the URL
-
+  const [loadingId, setLoadingId] = useState(true)
   const dispatch = useDispatch()
   const user = useSelector((state) => state?.user?.userInfo?._id) || ''
   const userinfo = useSelector((state) => state?.user?.userInfo)
@@ -50,6 +50,23 @@ const SalonPage = () => {
     navigate('/?salondeleted=true') // Redirect to the homepage
     setMessageSalonCreated('Salon has been deleted.') // Set the deletion message for the homepage
   }
+  useEffect(() => {
+    // Check if the id is available
+    if (id) {
+      // The id is available, fetch the salon data
+      dispatch(fetchSalonsByIdAsync(id))
+        .then(() => {
+          // Set loadingId to false when the data is fetched
+          setLoadingId(false)
+        })
+        .catch((error) => {
+          // Handle any errors during the data fetching process
+          setLoadingId(false)
+          // Optionally, you can display an error message or handle the error gracefully
+          console.error('Error fetching salon data:', error)
+        })
+    }
+  }, [dispatch, id])
   const review = useSelector((state) => state?.review?.reviews)
   useEffect(() => {
     if (salon.user === user) {
@@ -62,8 +79,16 @@ const SalonPage = () => {
     }
     dispatch(fetchSalonsByIdAsync(id))
   }, [dispatch, id, user, salon.user, salon?.createdAt, salon._id, review])
+  // If loadingId is true, render a loading indicator
+  if (loadingId) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Puff color="#00BFFF" height={100} width={100} />
+      </div>
+    )
+  }
 
-  if (loading) {
+  if (!id) {
     return (
       <div>
         <Loading />

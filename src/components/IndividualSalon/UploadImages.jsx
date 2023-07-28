@@ -163,16 +163,7 @@ const UploadImages = ({ existingImages, salonId }) => {
       document.body.classList.remove('overflow-hidden')
     })
   }
-  //   const [addSuccessImage, setaddSuccessImage] = useState(false)
-  //   useEffect(() => {
-  //     if (addSuccessImage) {
-  //       const timer = setTimeout(() => {
-  //         window.location.reload() // Reload the page after 3 seconds
-  //       }, 5000)
-  //       setaddSuccessImage(false)
-  //       return () => clearTimeout(timer) // Clean up the timer on unmounting
-  //     }
-  //   }, [addSuccessImage])
+
   useEffect(() => {
     setImages(existingImages)
     setImageUrls(existingImages)

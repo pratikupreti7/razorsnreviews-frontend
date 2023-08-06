@@ -11,6 +11,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import ReactLoading from 'react-loading'
 import { motion } from 'framer-motion'
 import { Puff } from 'react-loader-spinner'
+import './styles.css'
+import Shimmer from '../../Shimmer/Shimmer'
 const SalonHomeList = () => {
   // const [messageSalonCreated, setMessageSalonCreated] = useState('')
   const SalonItem = React.lazy(() => import('../../SalonItem/SalonItem'))
@@ -246,28 +248,9 @@ const SalonHomeList = () => {
 
   const salonPage = true
 
-  // if (loading || isInitialLoading) {
-  //   return (
-  //     <div className="flex justify-center items-center h-screen">
-  //       <ReactLoading type="spin" color="#fff" height={50} width={50} />
-  //     </div>
-  //   )
-  // }
-
   if (error) {
     return <Error />
   }
-  let mostReviewedSalon = null
-  let maxReviews = 0
-
-  for (const salon of filteredData) {
-    if (salon.reviews.length > maxReviews) {
-      maxReviews = salon.reviews.length
-      mostReviewedSalon = salon
-    }
-  }
-
-  console.log(mostReviewedSalon)
 
   // Animation variants
   const fadeInVariant = {
@@ -319,7 +302,7 @@ const SalonHomeList = () => {
           />
         </div>
 
-        <h2 className="p-4 text-gray-700 m-[0.25] md:text-3xl font-lily font-bold text-center mb-2 my-2">
+        <h2 className="p-4 text-gray-700 m-[0.25] text-3xl font-lily font-bold text-center mb-2 my-2">
           SALON HOME LIST
         </h2>
         <div className="absolute mt-5 mr-3 top-20 right-5">
@@ -379,23 +362,47 @@ const SalonHomeList = () => {
               </div>
             }
           >
-            <div className="flex flex-wrap justify-center p-2">
-              {filteredData?.map((salon) => (
-                <div
-                  key={salon._id}
-                  className=" cursor-pointer bg-white shadow-lg w-full md:3/12 lg:w-5/12 lg:m-2 lg:justify-center rounded-lg overflow-hidden  mb-6 mx-1 p-6 flex flex-col justify-between"
-                >
-                  <SalonItem
-                    key={salon._id}
-                    salon={salon}
-                    salonPage={salonPage}
-                    isEditPage={false}
-                    createdByCurrentUser={salon.user === userid}
-                    userid={userid}
-                  />
+            {isInitialLoading ? (
+              <>
+                <div className="m-2 p-2 flex flex-col  items-center   text-gray-800">
+                  <h1 className="text-4xl font-lexend font-bold mb-4 animate-pulse">
+                    Preparing the Best Salons Just for You! ✨
+                  </h1>
+                  <p className="text-xl mb-4">
+                    Sit back and relax. We are curating a unique experience.
+                    Grab a cup of coffee, it won't be long! ☕️
+                  </p>
                 </div>
-              ))}
-            </div>
+                <div className="flex flex-wrap justify-center p-2">
+                  {Array.from({ length: 6 }).map((_, index) => (
+                    <div
+                      key={index}
+                      className=" cursor-pointer bg-white shadow-lg w-full md:3/12 lg:w-5/12 lg:m-2 lg:justify-center rounded-lg overflow-hidden  mb-6 mx-1 p-6 flex flex-col justify-between"
+                    >
+                      <Shimmer key={index} />
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="flex flex-wrap justify-center p-2">
+                {filteredData?.map((salon) => (
+                  <div
+                    key={salon._id}
+                    className=" cursor-pointer bg-white shadow-lg w-full md:3/12 lg:w-5/12 lg:m-2 lg:justify-center rounded-lg overflow-hidden  mb-6 mx-1 p-6 flex flex-col justify-between"
+                  >
+                    <SalonItem
+                      key={salon._id}
+                      salon={salon}
+                      salonPage={salonPage}
+                      isEditPage={false}
+                      createdByCurrentUser={salon.user === userid}
+                      userid={userid}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </React.Suspense>
         )}
       </motion.div>

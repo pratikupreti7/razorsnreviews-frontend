@@ -70,20 +70,20 @@ const AddSalon = () => {
     }
   }
 
-  useEffect(() => {
-    if (addSuccess) {
-      // Display the toast
-      toast.success('Salon Added Successfully')
+  // useEffect(() => {
+  //   if (addSuccess) {
+  //     // Display the toast
+  //     toast.success('Salon Added Successfully')
 
-      // Set a timeout equal to the duration of the toast
-      const timer = setTimeout(() => {
-        navigate(`/salon/${SalonId}`)
-      }, 3000) // 2000 milliseconds = 2 seconds
+  //     // Set a timeout equal to the duration of the toast
+  //     const timer = setTimeout(() => {
+  //       navigate(`/salon/${SalonId}`)
+  //     }, 3000) // 2000 milliseconds = 2 seconds
 
-      // Clear the timer if the component is unmounted
-      return () => clearTimeout(timer)
-    }
-  }, [addSuccess, navigate, SalonId])
+  //     // Clear the timer if the component is unmounted
+  //     return () => clearTimeout(timer)
+  //   }
+  // }, [addSuccess, navigate, SalonId])
 
   const formik = useFormik({
     initialValues: {
@@ -109,13 +109,21 @@ const AddSalon = () => {
         }
 
         setLoading(true)
-        await dispatch(addSalonAsync(values))
+        const newSalonId = await dispatch(addSalonAsync(values))
         setLoading(false)
 
-        // if (newSalonId) {
-        //   navigate(`/salon/${newSalonId}`)
-        //   // Navigates to the newly added salon page
-        // }
+        if (newSalonId) {
+          toast.success('Salon Added Successfully')
+
+          // Set a timeout equal to the duration of the toast
+          const timer = setTimeout(() => {
+            navigate(`/salon/${newSalonId}`)
+          }, 4000) // 2000 milliseconds = 2 seconds
+          // Clear the timer if the component is unmounted
+          return () => clearTimeout(timer)
+
+          // Navigates to the newly added salon page
+        }
       } catch (error) {
         console.error(error)
         setLoading(false)

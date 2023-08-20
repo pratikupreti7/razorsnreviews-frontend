@@ -4,13 +4,29 @@ import { useNavigate } from 'react-router-dom'
 import UserDetails from './UserDetails'
 import { fetchSalonsByUserAsync } from '../../../store/apiSalonCalls'
 import UserSalon from './UserSalon'
-import { updateUser } from '.././../../store/apiCalls'
+import { updateUser, updateUserProfile } from '.././../../store/apiCalls'
 import { clearError } from '../../../store/userSlice'
 import { ToastContainer, toast } from 'react-toastify'
+
 const UserProfile = () => {
-  const { userInfo, loading, userupdateError } = useSelector(
-    (state) => state.user,
-  )
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleImageClick = () => {
+    // setImageUploaded(false)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
+  const {
+    userInfo,
+    loading,
+    userupdateError,
+    userProfileLoading,
+    userProfileError,
+  } = useSelector((state) => state.user)
+
   const [isEditMode, setIsEditMode] = useState(false)
 
   const [saveAttempted, setSaveAttempted] = useState(false)
@@ -26,8 +42,12 @@ const UserProfile = () => {
     currentpassword: '',
     newpassword: '',
   })
+  const [editProfile, setEditProfile] = useState({
+    userId: userInfo?._id,
+    pic: userInfo?.pic,
+  })
   const salonuser = useSelector((state) => state.user.salonuser)
-  // console.log(salonuser)
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -39,6 +59,7 @@ const UserProfile = () => {
     ) {
       return setPicMessage('Please Select an Image')
     }
+
     setPicMessage(null)
     if (pics?.type === 'image/jpeg' || pics?.type === 'image/png') {
       const data = new FormData()
@@ -54,6 +75,10 @@ const UserProfile = () => {
         .then((data) => {
           // formik.setFieldValue('pic', data.url.toString())
           setImageUploaded(true)
+          setEditProfile((prevValues) => ({
+            ...prevValues,
+            pic: data.url.toString(),
+          }))
         })
 
         .catch((err) => {
@@ -63,6 +88,19 @@ const UserProfile = () => {
       return setPicMessage('Please Select an Image')
     }
   }
+  const handleProfile = async () => {
+    try {
+      await dispatch(updateUserProfile(editProfile))
+
+      toast.success('Profile Updated Successfully')
+
+      setIsModalOpen(false)
+      setImageUploaded(false)
+    } catch (error) {
+      toast.error('Failed to Update Profile ')
+    }
+  }
+
   const handleSave = async () => {
     // Create a copy of the editValues object
     const updateValues = { ...editValues }
@@ -142,6 +180,10 @@ const UserProfile = () => {
         imageUploaded={imageUploaded}
         picMessage={picMessage}
         postDetails={postDetails}
+        handleProfile={handleProfile}
+        handleImageClick={handleImageClick}
+        closeModal={closeModal}
+        isModalOpen={isModalOpen}
       />
 
       {/* Todo: Salon Added */}

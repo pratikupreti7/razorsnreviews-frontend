@@ -73,12 +73,12 @@ export const editSalonByIdAsync = (id, updatedSalonData) => async (
       config,
     )
 
-    console.log(data)
+    
 
     dispatch(editByIdSuccess(data))
-    console.log(data, 'data')
+  
   } catch (error) {
-    console.log(error, 'error')
+   
     dispatch(editByIdFailure(error?.response?.data || 'Editing Salon Failed'))
   }
 }

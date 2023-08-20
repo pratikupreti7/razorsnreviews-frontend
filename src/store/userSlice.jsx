@@ -10,6 +10,8 @@ const userSlice = createSlice({
     userInfo: userInfofromStorage,
     loading: false,
     error: null,
+    userProfileUpdateError: null,
+    userProfileUpdateLoading: false,
     userupdateError: null,
     profilePicture: '',
     salonuser: [],
@@ -65,17 +67,17 @@ const userSlice = createSlice({
       state.userupdateError = action.payload
     },
     updateUserProfileStart: (state, action) => {
-      state.loading = true
-      state.error = null
+      state.userProfileUpdateLoading = true
+      state.userProfileUpdateError = null
     },
     updateUserProfileSuccess: (state, action) => {
-      state.loading = false
+      state.userProfileUpdateLoading = false
       state.userInfo = action.payload
-      state.error = null
+      state.userProfileUpdateError = null
     },
     updateUserProfileFailure: (state, action) => {
-      state.loading = false
-      state.error = action.payload
+      state.userProfileUpdateLoading = false
+      state.userProfileUpdateError = action.payload
     },
     clearError: (state) => {
       // state.error = null

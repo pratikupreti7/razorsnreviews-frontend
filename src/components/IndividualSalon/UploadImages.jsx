@@ -109,7 +109,7 @@ const UploadImages = ({ existingImages, salonId }) => {
   const handleUploadAll = () => {
     if (imageUrls.length > 0) {
       const authToken = authTokens
-      console.log(authTokens)
+      
       const config = {
         headers: {
           'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ const UploadImages = ({ existingImages, salonId }) => {
           // Handle the error if the image upload fails
         })
     } else {
-      console.log('No images to upload')
+     
     }
   }
 

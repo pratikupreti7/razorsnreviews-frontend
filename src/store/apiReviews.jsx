@@ -22,10 +22,10 @@ export const addReviewAsync = (reviewData) => {
       }
 
       const { data } = await axios.post('https://razorsnreviews-api.onrender.com/api/reviews', reviewData, config)
-      console.log(data)
+   
       dispatch(addSuccess(data))
     } catch (error) {
-      console.log(error)
+     
       dispatch(addFailure(error?.response?.data))
     }
   }
@@ -58,10 +58,10 @@ export const changeReviewAsync = ({ salonId, ...reviewData }) => {
         reviewData,
         config,
       )
-      console.log(data)
+     
       dispatch(addSuccess(data))
     } catch (error) {
-      console.log(error)
+     
       dispatch(addFailure(error?.response?.data))
     }
   }

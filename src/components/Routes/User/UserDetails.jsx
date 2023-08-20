@@ -12,16 +12,11 @@ const UserDetails = ({
   picMessage,
   error,
   postDetails,
+  handleImageClick,
+  closeModal,
+  isModalOpen
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const handleImageClick = () => {
-    setIsModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-  }
+  
 
   return (
     <div className="flex justify-center">
@@ -86,13 +81,15 @@ const UserDetails = ({
                       )}
                     </div>
                     <div className="flex justify-between bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                      <button
-                        type="button"
-                        className="bg-blue-500 hover:bg-blue-700 border mt-2 space-x-4 h-8 text-white font-lexend  font-py-1 px-8 rounded focus:outline-none focus:border-2 focus:border-[#ff967068]"
-                        onClick={handleProfile}
-                      >
-                        Upload Photo
-                      </button>
+                      {imageUploaded && (
+                        <button
+                          type="button"
+                          className="bg-blue-500 hover:bg-blue-700 border mt-2 space-x-4 h-8 text-white font-lexend  font-py-1 px-8 rounded focus:outline-none focus:border-2 focus:border-[#ff967068]"
+                          onClick={handleProfile}
+                        >
+                          Upload Photo
+                        </button>
+                      )}
                       <button
                         type="button"
                         className="bg-red-500 hover:bg-red-700 border mt-2 space-x-4 h-8 text-white font-lexend  font-py-1 px-8 rounded focus:outline-none focus:border-2 focus:border-[#ff967068]"

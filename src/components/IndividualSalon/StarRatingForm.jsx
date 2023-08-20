@@ -111,7 +111,7 @@ const StarRatingForm = () => {
         setPreviousValues(values)
         if (salonId) {
           if (editMode) {
-            console.log(salonId)
+           
             await dispatch(changeReviewAsync({ ...values, salonId })).then(
               () => {
                 setAlreadyReviewed(true)

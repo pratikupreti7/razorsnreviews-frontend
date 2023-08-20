@@ -73,7 +73,7 @@ export const updateUser = (values) => {
       if (!userInfo || !userInfo.token) {
         const errorMessage = 'You need to be logged in to change your info'
         dispatch(updateUserInfoFailure(errorMessage))
-        
+
         return
       }
       dispatch(updateUserInfoStart())
@@ -95,31 +95,34 @@ export const updateUser = (values) => {
     }
   }
 }
-export const updateUserProfile = (values) => async (getState, dispatch) => {
-  try {
-    const userInfo = getState().user.userInfo
 
-    if (!userInfo || !userInfo.token) {
-      const errorMessage = 'You need to be logged in to change your profile.'
-      dispatch(updateUserInfoFailure(errorMessage))
-      return
-    }
-    dispatch(updateUserProfileStart())
+export const updateUserProfile = (values) => {
+  return async (dispatch, getState) => {
+    try {
+      const userInfo = getState().user.userInfo
+      if (!userInfo || !userInfo.token) {
+        const errorMessage = 'You need to be logged in to change your info'
+        dispatch(updateUserProfileFailure(errorMessage))
 
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-        'auth-token': userInfo.token,
-      },
+        return
+      }
+      dispatch(updateUserProfileStart())
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+          'auth-token': userInfo.token,
+        },
+      }
+      const { data } = await axios.post(
+        'https://razorsnreviews-api.onrender.com/api/user/updatepic',
+        values,
+        config,
+      )
+     
+      dispatch(updateUserProfileSuccess(data))
+      localStorage.setItem('userInfo', JSON.stringify(data))
+    } catch (error) {
+      dispatch(updateUserProfileFailure(error?.response?.data || 'Update Failed'))
     }
-    const { data } = await axios.post(
-      'https://razorsnreviews-api.onrender.com/api/user/updatepic',
-      values,
-      config,
-    )
-    dispatch(updateUserProfileSuccess(data))
-    localStorage.setItem('userInfo', JSON.stringify(data))
-  } catch (error) {
-    dispatch(updateUserProfileFailure(error?.response?.data || 'Update Failed'))
   }
 }

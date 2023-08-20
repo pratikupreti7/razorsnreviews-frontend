@@ -34,7 +34,7 @@ const ReviewsContainer = ({ reviews }) => {
               'https://cdn-icons-png.flaticon.com/512/149/149071.png'
             }
             userName={review?.user?.name || 'John Doe'}
-            verifiedBuyer={'Verified Buyer'}
+            verifiedBuyer={'Verified Customer'}
             reviewHeading={review?.description}
             reviewDescription={review?.comment}
             rating={review?.rating}

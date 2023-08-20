@@ -5,7 +5,14 @@ import {
   registerFailure,
   registerStart,
   registerSuccess,
-  logout, // the action creator
+  logout,
+  updateUserInfoFailure,
+  updateUserInfoStart,
+  updateUserInfoSuccess,
+  updateUserProfileStart,
+  updateUserProfileSuccess,
+  updateUserProfileFailure,
+  // the action creator
 } from './userSlice'
 import axios from 'axios'
 
@@ -17,7 +24,11 @@ export const login = (values) => async (dispatch) => {
         'Content-type': 'application/json',
       },
     }
-    const { data } = await axios.post('https://razorsnreviews-api.onrender.com/api/user/login', values, config)
+    const { data } = await axios.post(
+      'https://razorsnreviews-api.onrender.com/api/user/login',
+      values,
+      config,
+    )
     dispatch(loginSuccess(data))
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
@@ -33,7 +44,11 @@ export const register = (values) => async (dispatch) => {
         'Content-type': 'application/json',
       },
     }
-    const { data } = await axios.post('https://razorsnreviews-api.onrender.com/api/user/register', values, config)
+    const { data } = await axios.post(
+      'https://razorsnreviews-api.onrender.com/api/user/register',
+      values,
+      config,
+    )
 
     dispatch(registerSuccess(data))
     dispatch(loginSuccess(data))
@@ -49,5 +64,62 @@ export const logoutUser = () => async (dispatch) => {
   } catch (error) {
     // Handle any error that may occur during logout
     console.log('User Not Logged Out')
+  }
+}
+export const updateUser = (values) => {
+  return async (dispatch, getState) => {
+    try {
+      const userInfo = getState().user.userInfo
+      if (!userInfo || !userInfo.token) {
+        const errorMessage = 'You need to be logged in to change your info'
+        dispatch(updateUserInfoFailure(errorMessage))
+        
+        return
+      }
+      dispatch(updateUserInfoStart())
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+          'auth-token': userInfo.token,
+        },
+      }
+      const { data } = await axios.post(
+        'https://razorsnreviews-api.onrender.com/api/user/updateinfo',
+        values,
+        config,
+      )
+      dispatch(updateUserInfoSuccess(data))
+      localStorage.setItem('userInfo', JSON.stringify(data))
+    } catch (error) {
+      dispatch(updateUserInfoFailure(error?.response?.data || 'Update Failed'))
+    }
+  }
+}
+export const updateUserProfile = (values) => async (getState, dispatch) => {
+  try {
+    const userInfo = getState().user.userInfo
+
+    if (!userInfo || !userInfo.token) {
+      const errorMessage = 'You need to be logged in to change your profile.'
+      dispatch(updateUserInfoFailure(errorMessage))
+      return
+    }
+    dispatch(updateUserProfileStart())
+
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        'auth-token': userInfo.token,
+      },
+    }
+    const { data } = await axios.post(
+      'https://razorsnreviews-api.onrender.com/api/user/updatepic',
+      values,
+      config,
+    )
+    dispatch(updateUserProfileSuccess(data))
+    localStorage.setItem('userInfo', JSON.stringify(data))
+  } catch (error) {
+    dispatch(updateUserProfileFailure(error?.response?.data || 'Update Failed'))
   }
 }

@@ -67,8 +67,7 @@ const salonSlice = createSlice({
     // },
 
     editByIdSuccess: (state, action) => {
-      console.log('Current state:', state)
-      console.log('Action payload:', action.payload)
+     
       state.loading = false
       state.error = null
       state.editSuccess = true
@@ -119,18 +118,6 @@ const salonSlice = createSlice({
       state.error = null
       state.addSuccess = false
     },
-    // addSuccess: (state, action) => {
-    //   state.loading = false
-    //   state.error = null
-    //   state.addSuccess = true
-    //   state.salons.push(action.payload)
-    // },
-    // addSuccess: (state, action) => {
-    //   state.loading = false
-    //   state.error = null
-    //   state.addSuccess = true
-    //   state.salons = action.payload // Add the new salon object to the salons array
-    // },
 
     addSuccess: (state, action) => {
       state.loading = false

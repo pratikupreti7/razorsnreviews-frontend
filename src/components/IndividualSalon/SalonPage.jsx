@@ -4,7 +4,7 @@ import SalonItem from '../SalonItem/SalonItem'
 import { useDispatch, useSelector } from 'react-redux'
 //
 import { Link } from 'react-router-dom'
-import { toast, ToastContainer } from 'react-toastify'
+import {ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Puff } from 'react-loader-spinner'
 import UploadImages from './UploadImages'
@@ -51,18 +51,14 @@ const SalonPage = () => {
     setMessageSalonCreated('Salon has been deleted.') // Set the deletion message for the homepage
   }
   useEffect(() => {
-    // Check if the id is available
     if (id) {
-      // The id is available, fetch the salon data
       dispatch(fetchSalonsByIdAsync(id))
         .then(() => {
-          // Set loadingId to false when the data is fetched
           setLoadingId(false)
         })
         .catch((error) => {
-          // Handle any errors during the data fetching process
           setLoadingId(false)
-          // Optionally, you can display an error message or handle the error gracefully
+
           console.error('Error fetching salon data:', error)
         })
     }

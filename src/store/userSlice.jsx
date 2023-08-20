@@ -10,6 +10,7 @@ const userSlice = createSlice({
     userInfo: userInfofromStorage,
     loading: false,
     error: null,
+    userupdateError: null,
     profilePicture: '',
     salonuser: [],
   },
@@ -47,9 +48,38 @@ const userSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
-
-    clearError: (state) => {
+    updateUserInfoStart: (state, action) => {
+      state.loading = true
       state.error = null
+    },
+    updateUserInfoSuccess: (state, action) => {
+      state.loading = false
+      state.userInfo = {
+        ...state.userInfo, // Preserve existing fields, including the token
+        ...action.payload, // Merge updated fields from server
+      }
+      state.error = null
+    },
+    updateUserInfoFailure: (state, action) => {
+      state.loading = false
+      state.userupdateError = action.payload
+    },
+    updateUserProfileStart: (state, action) => {
+      state.loading = true
+      state.error = null
+    },
+    updateUserProfileSuccess: (state, action) => {
+      state.loading = false
+      state.userInfo = action.payload
+      state.error = null
+    },
+    updateUserProfileFailure: (state, action) => {
+      state.loading = false
+      state.error = action.payload
+    },
+    clearError: (state) => {
+      // state.error = null
+      state.userupdateError = null
     },
     // Fetch by specific ID
     fetchSalonsByUserStart: (state) => {
@@ -80,7 +110,12 @@ export const {
   fetchSalonsByUserFailure,
   logout,
   clearError,
-  updateUserInfo,
+  updateUserInfoStart,
+  updateUserInfoSuccess,
+  updateUserInfoFailure,
+  updateUserProfileStart,
+  updateUserProfileSuccess,
+  updateUserProfileFailure,
 } = userSlice.actions
 
 export default userSlice.reducer

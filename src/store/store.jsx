@@ -8,4 +8,5 @@ export default configureStore({
     salon: salonReducer,
     review: reviewReducer,
   },
+  
 })

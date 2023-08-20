@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchSalonsAsync } from '../../../store/apiSalonCalls'
 import Filters from '../../Filters/Filters'
-// import SalonItem from '../../SalonItem/SalonItem'
+import 'react-toastify/dist/ReactToastify.css'
+import { toast, ToastContainer } from 'react-toastify'
 import Search from '../../Search/Search'
 import Error from '../Error/Error'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock, faHourglass } from '@fortawesome/free-solid-svg-icons'
 import { useLocation, useNavigate } from 'react-router-dom'
-import ReactLoading from 'react-loading'
+
 import { motion } from 'framer-motion'
 import { Puff } from 'react-loader-spinner'
 import './styles.css'
 import Shimmer from '../../Shimmer/Shimmer'
+
 const SalonHomeList = () => {
   // const [messageSalonCreated, setMessageSalonCreated] = useState('')
   const SalonItem = React.lazy(() => import('../../SalonItem/SalonItem'))
@@ -138,6 +140,7 @@ const SalonHomeList = () => {
       })
     if (showSalonDeleteMessage) {
       const timer = setTimeout(() => {
+        toast.success('Salon deleted successfully!')
         setshowSalonDeleteMessage(false)
         navigate('.', { replace: true }) // replaces the current URL
       }, 2000) // 2000ms = 2s
@@ -263,6 +266,11 @@ const SalonHomeList = () => {
     visible: { x: 0, opacity: 1 },
   }
 
+  // if (showSalonDeleteMessage) {
+  //   ;<ToastContainer autoClose={3000} />
+  //   return <FaTruckLoading />
+  // }
+
   return (
     <motion.div
       initial="hidden"
@@ -270,6 +278,7 @@ const SalonHomeList = () => {
       variants={fadeInVariant}
       className="flex flex-col md:flex-row text-white justify-between"
     >
+      <ToastContainer autoClose={3000} />
       <motion.div
         initial="hidden"
         animate="visible"
@@ -305,13 +314,14 @@ const SalonHomeList = () => {
         <h2 className="p-4 text-gray-700 m-[0.25] text-3xl font-lily font-bold text-center mb-2 my-2">
           SALON HOME LIST
         </h2>
-        <div className="absolute mt-5 mr-3 top-20 right-5">
+
+        {/* <div className="absolute mt-5 mr-3 top-20 right-5">
           {showSalonDeleteMessage && (
             <div className="fixed top-30 w-96 right-40 bg-red-600 h-10 m-2 text-white text-center font-semibold py-2 px-6 rounded-lg shadow-lg transition-opacity duration-500 ease-in-out">
               Your salon has been successfully deleted.
             </div>
           )}
-        </div>
+        </div> */}
         {/* Sort buttons */}
         <div className="flex m-2 justify-end md:mr-28">
           <button

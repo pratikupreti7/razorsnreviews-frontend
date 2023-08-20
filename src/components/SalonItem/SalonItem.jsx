@@ -89,32 +89,10 @@ const SalonItem = ({
         zip: salon?.zip || '',
       })
     }
-  }, [
-    isEditing,
-    salon?.address,
-    salon?.avgRating,
-    salon?.city,
-    salon?.description,
-    salon?.email,
-    salon?.name,
-    salon?.phone,
-    salon?.price,
-    salon?.services,
-    salon?.state,
-    salon?.website,
-    salon?.zip,
-  ])
+  }, [isEditing, salon])
+
   const handleCancel = () => {
     setIsEditing(false)
-  }
-  const combinedVariant = {
-    hover: {
-      scale: 1.05,
-      transition: {
-        duration: 0.3,
-      },
-      ...hoverVariant,
-    },
   }
 
   const { editSuccess, error } = useSelector((state) => state.salon)
@@ -145,9 +123,19 @@ const SalonItem = ({
       toast.error(`Error: ${error}`)
     }
   }, [editSuccess, error, dispatch])
+
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target
+
+  //   setFormData((prevFormData) => ({
+  //     ...prevFormData,
+  //     [name]: value,
+  //   }))
+  // }
   const handleInputChange = (event) => {
     const { name, value } = event.target
 
+    // Update the specific field without re-creating the whole object
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -196,7 +184,7 @@ const SalonItem = ({
       animate="visible"
       variants={fadeInVariant}
       className="bg-white "
-      whileHover={hoverVariant}
+      whileHover="hover"
     >
       <ToastContainer autoClose={2000} />
       <div className="flex flex-col mt-6">

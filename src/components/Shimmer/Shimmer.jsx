@@ -5,6 +5,7 @@ const Shimmer = () => (
     <div className="flex flex-col mt-6 space-y-4">
       {/* Header */}
       <div className="h-8 bg-gray-300 rounded-sm"></div>
+      {/* div for an image */}
 
       {/* Image */}
       <div className="w-full h-48 bg-gray-300 rounded-lg"></div>

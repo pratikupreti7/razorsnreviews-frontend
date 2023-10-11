@@ -27,7 +27,7 @@ const StarRatingForm = () => {
   useEffect(() => {
     const checkReviewStatus = async () => {
       try {
-        const response = await fetch(`https://razorsnreviews-api.onrender.com/api/reviews/user/${userId}`)
+        const response = await fetch(`https://razorsnreviews-api-lmen.onrender.com/api/reviews/user/${userId}`)
         const data = await response.json()
         const salonIds = data.salonIds
 
@@ -154,7 +154,7 @@ const StarRatingForm = () => {
         },
       }
       const response = await axios.get(
-        `https://razorsnreviews-api.onrender.com/api/reviews/user/${userId}/salon/${salonId}`,
+        `https://razorsnreviews-api-lmen.onrender.com/api/reviews/user/${userId}/salon/${salonId}`,
         config,
       )
 

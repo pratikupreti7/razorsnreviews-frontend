@@ -23,7 +23,7 @@ export const fetchSalonsAsync = () => async (dispatch) => {
         'Content-type': 'application/json',
       },
     }
-    const { data } = await axios.get('https://razorsnreviews-api.onrender.com/api/salon', config)
+    const { data } = await axios.get('https://razorsnreviews-api-lmen.onrender.com/api/salon', config)
 
     dispatch(fetchSuccess(data))
   } catch (error) {
@@ -37,7 +37,7 @@ export const fetchSalonsByIdAsync = (id) => async (dispatch) => {
         'Content-type': 'application/json',
       },
     }
-    const { data } = await axios.get(`https://razorsnreviews-api.onrender.com/api/salon/${id}`, config)
+    const { data } = await axios.get(`https://razorsnreviews-api-lmen.onrender.com/api/salon/${id}`, config)
 
     dispatch(fetchByIdSuccess(data))
   } catch (error) {
@@ -68,7 +68,7 @@ export const editSalonByIdAsync = (id, updatedSalonData) => async (
       },
     }
     const { data } = await axios.put(
-      `https://razorsnreviews-api.onrender.com/api/salon/${id}`,
+      `https://razorsnreviews-api-lmen.onrender.com/api/salon/${id}`,
       updatedSalonData,
       config,
     )
@@ -99,7 +99,7 @@ export const deleteSalonsByIdAsync = (id) => async (dispatch, getState) => {
         'auth-token': userInfo.token,
       },
     }
-    const { data } = await axios.delete(`https://razorsnreviews-api.onrender.com/api/salon/${id}`, config)
+    const { data } = await axios.delete(`https://razorsnreviews-api-lmen.onrender.com/api/salon/${id}`, config)
 
     dispatch(deleteByIdSuccess(data))
   } catch (error) {
@@ -128,7 +128,7 @@ export const addSalonAsync = (salonData) => {
         },
       }
 
-      const { data } = await axios.post('https://razorsnreviews-api.onrender.com/api/salon', salonData, config)
+      const { data } = await axios.post('https://razorsnreviews-api-lmen.onrender.com/api/salon', salonData, config)
 
       dispatch(addSuccess(data))
       return data._id
@@ -158,7 +158,7 @@ export const fetchSalonsByUserAsync = (userId) => async (
       },
     }
 
-    const { data } = await axios.get(`https://razorsnreviews-api.onrender.com/api/salon/user/${userId}`, config)
+    const { data } = await axios.get(`https://razorsnreviews-api-lmen.onrender.com/api/salon/user/${userId}`, config)
 
     dispatch(fetchSalonsByUserSuccess(data))
   } catch (error) {

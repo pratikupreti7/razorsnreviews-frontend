@@ -21,7 +21,7 @@ export const addReviewAsync = (reviewData) => {
         },
       }
 
-      const { data } = await axios.post('https://razorsnreviews-api-lmen.onrender.com.com/api/reviews', reviewData, config)
+      const { data } = await axios.post('https://razorsnreviews-api-lmen.onrender.com/api/reviews', reviewData, config)
    
       dispatch(addSuccess(data))
     } catch (error) {

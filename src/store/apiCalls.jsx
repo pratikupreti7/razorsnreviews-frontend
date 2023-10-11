@@ -25,7 +25,7 @@ export const login = (values) => async (dispatch) => {
       },
     }
     const { data } = await axios.post(
-      'https://razorsnreviews-api.onrender.com/api/user/login',
+      'https://razorsnreviews-api-lmen.onrender.com/api/user/login',
       values,
       config,
     )
@@ -45,7 +45,7 @@ export const register = (values) => async (dispatch) => {
       },
     }
     const { data } = await axios.post(
-      'https://razorsnreviews-api.onrender.com/api/user/register',
+      'https://razorsnreviews-api-lmen.onrender.com/api/user/register',
       values,
       config,
     )
@@ -84,7 +84,7 @@ export const updateUser = (values) => {
         },
       }
       const { data } = await axios.post(
-        'https://razorsnreviews-api.onrender.com/api/user/updateinfo',
+        'https://razorsnreviews-api-lmen.onrender.com/api/user/updateinfo',
         values,
         config,
       )
@@ -114,7 +114,7 @@ export const updateUserProfile = (values) => {
         },
       }
       const { data } = await axios.post(
-        'https://razorsnreviews-api.onrender.com/api/user/updatepic',
+        'https://razorsnreviews-api-lmen.onrender.com/api/user/updatepic',
         values,
         config,
       )

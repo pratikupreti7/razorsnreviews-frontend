@@ -118,7 +118,7 @@ const UploadImages = ({ existingImages, salonId }) => {
       }
 
       axios
-        .put(`https://razorsnreviews-api.onrender.com/api/salon/${salonId}/add-image`, { imageUrls }, config)
+        .put(`https://razorsnreviews-api-lmen.onrender.com/api/salon/${salonId}/add-image`, { imageUrls }, config)
         .then((response) => {
           toast.success('Images added successfully')
           setTimeout(() => {

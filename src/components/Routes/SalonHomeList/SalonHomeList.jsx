@@ -376,8 +376,11 @@ const SalonHomeList = () => {
               <>
                 <div className="m-2 p-2 flex flex-col  items-center   text-gray-800">
                   <h1 className="text-4xl font-lexend font-bold mb-4 animate-pulse">
-                    Preparing the Best Salons Just for You! ✨
+                    Preparing Salons May take some time! ✨
                   </h1>
+                   <h2 className="text-4xl font-lexend font-bold mb-4 animate-pulse">
+                    Watch video demonstration on youtube here: <a heref="https://www.youtube.com/watch?v=TV0fPsDRitU">Link</a> ! ✨
+                  </h2>
                   <p className="text-xl mb-4">
                     Sit back and relax. We are curating a unique experience.
                     Grab a cup of coffee, it won't be long! ☕️

@@ -378,9 +378,10 @@ const SalonHomeList = () => {
                   <h1 className="text-4xl font-lexend font-bold mb-4 animate-pulse">
                     Preparing Salons May take some time! ✨
                   </h1>
-                   <h2 className="text-4xl font-lexend font-bold mb-4 animate-pulse">
-                    Watch video demonstration on youtube here: <a href="https://www.youtube.com/watch?v=TV0fPsDRitU">Link</a> ! ✨
-                  </h2>
+                  <h2 className="text-4xl font-lexend font-bold mb-4 animate-pulse">
+    Watch our video demonstration on YouTube: 
+    <a href="https://www.youtube.com/watch?v=TV0fPsDRitU" target="_blank" rel="noopener noreferrer">Watch Video</a>! ✨
+  </h2>
                   <p className="text-xl mb-4">
                     Sit back and relax. We are curating a unique experience.
                     Grab a cup of coffee, it won't be long! ☕️

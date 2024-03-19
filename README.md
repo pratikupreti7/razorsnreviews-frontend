@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project is available for demo at : (https://razorsnreviews.onrender.com/) 
+This project is available for demo at : (https://razorsnreview.onrender.com/) 
 
 ## Available Scripts
 

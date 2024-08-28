@@ -7,11 +7,11 @@ body,
 html {
   margin: 0;
   padding: 0;
-  background-color: #d6e4ffc4;
+  /* background-color: #d6e4ffc4; */
 
   /*  */
 
-  /* background-color: #ceb9fd; */
+  background-color: #faf9f6;
   /* color: #ffffff; */
 }
 @tailwind base;

@@ -266,7 +266,7 @@ const SalonItem = ({
                 <div>
                   {isEditPage && !isEditing && (
                     <button
-                      className="pr-2 mr-2 border break-words space-x-2 border-[#ff967068] text-gray-700 bg-[#ff967068] font-lexend text-sm py-1 px-2 rounded focus:outline-none focus:border-2 focus:border-[#ff967068]"
+                      className="pr-2 mr-2 border break-words space-x-2 border-[#ff7476] text-gray-700 bg-[#ff7476] font-lexend text-sm py-1 px-2 rounded focus:outline-none focus:border-2 focus:border-[#ff967068]"
                       onClick={() => setIsEditing(true)}
                     >
                       Edit
@@ -274,7 +274,7 @@ const SalonItem = ({
                   )}
                   <button
                     onClick={handleDelete}
-                    className="border break-words space-x-2 border-[#ff967068] text-gray-700 bg-[#ff967068] font-lexend text-sm py-1 px-2 rounded focus:outline-none focus:border-2 focus:border-[#ff967068]"
+                    className="border break-words space-x-2 border-[#ff7476] text-gray-700 bg-[#ff7476] font-lexend text-sm py-1 px-2 rounded focus:outline-none focus:border-2 focus:border-[#ff967068]"
                   >
                     Delete
                   </button>

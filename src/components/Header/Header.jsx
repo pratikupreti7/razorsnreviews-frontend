@@ -26,7 +26,7 @@ const Header = () => {
   }
 
   return (
-    <div className="flex justify-start  flex-col md:flex-row   pl-4 h-auto md:h-28 border-b-2 bg-[#ff967094]   ">
+    <div className="flex justify-start  flex-col md:flex-row   pl-4 h-auto md:h-28 border-b-2    ">
       {/* <div className="md:mb-12 md:pb-7  pb-[-30px]">
         <a href="/" className="">
           <img
